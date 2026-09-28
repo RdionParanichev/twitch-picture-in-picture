@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "Twitch Picture in Picture",
+  "version": "1.0.0",
+  "description": "Стримы и VOD Twitch в отдельном окне поверх других окон. Кнопка PiP и Alt+Shift+P.",
+  "permissions": ["activeTab", "scripting"],
+  "background": { "service_worker": "background.js" },
+  "action": {
+    "default_title": "Twitch: картинка в картинке (Alt+Shift+P)",
+    "default_icon": { "16": "icons/16.png", "32": "icons/32.png", "48": "icons/48.png", "128": "icons/128.png" }
+  },
+  "icons": { "16": "icons/16.png", "32": "icons/32.png", "48": "icons/48.png", "128": "icons/128.png" },
+  "commands": {
+    "_execute_action": {
+      "suggested_key": { "default": "Alt+Shift+P" }
+    }
+  },
+  "content_scripts": [{
+    "matches": ["https://www.twitch.tv/*", "https://player.twitch.tv/*"],
+    "js": ["app.js"],
+    "run_at": "document_idle",
+    "all_frames": true
+  }]
+}

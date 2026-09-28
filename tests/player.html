@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ru">
+<meta charset="utf-8">
+<title>Twitch PiP — test player</title>
+<style>
+  body { margin: 0; background: #0e0e10; color: white; font: 16px sans-serif; }
+  main { width: 800px; margin: 60px auto; }
+  video { width: 800px; height: 450px; background: #18181b; }
+  h1 { font-size: 24px; }
+</style>
+<main><h1>Twitch PiP · тестовый плеер</h1><video muted autoplay playsinline></video></main>
+<script>
+  const canvas = document.createElement('canvas');
+  canvas.width = 1280;
+  canvas.height = 720;
+  const ctx = canvas.getContext('2d');
+  function draw() {
+    ctx.fillStyle = '#211333';
+    ctx.fillRect(0, 0, 1280, 720);
+    ctx.fillStyle = '#9146ff';
+    ctx.fillRect(0, 580, 1280, 140);
+    ctx.fillStyle = 'white';
+    ctx.font = 'bold 70px sans-serif';
+    ctx.fillText('Twitch Picture in Picture', 90, 310);
+    ctx.font = '30px sans-serif';
+    ctx.fillText('LIVE / VOD • ' + new Date().toLocaleTimeString(), 90, 390);
+  }
+  draw();
+  setInterval(draw, 100);
+  window.testStream = canvas.captureStream(10);
+  document.querySelector('video').srcObject = window.testStream;
+</script>
+</html>
